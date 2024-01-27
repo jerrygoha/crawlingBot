@@ -20,8 +20,11 @@ Including another URLconf
 """
 from django.urls import path
 
-from .view import views
+from . import views
+from crawlingApp.view import mainPage
 
 urlpatterns = [
     path("", views.index, name="index"),
+    ##메인화면
+    path("", mainPage.admin_main, name="admin_main"),
 ]

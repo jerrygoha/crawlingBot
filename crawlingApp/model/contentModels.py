@@ -19,3 +19,5 @@ class contentsLog(models.Model):
     contents_isTelegramSend = models.BooleanField(default=False)    #텔레그램 전송완료 여부
     contents_date = models.DateTimeField("logging post_date")       #로그 time check
 
+
+
