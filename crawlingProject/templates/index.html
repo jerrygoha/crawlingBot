@@ -1,0 +1,69 @@
+<!-- templates/crawlingBot/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crawling Bot</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>Crawling Bot</h1>
+    <button id="startBtn">Start Crawling</button>
+    <button id="stopBtn">Stop Crawling</button>
+    <div id="logContainer"></div>
+
+    <script>
+        $(document).ready(function() {
+            // 시작 버튼 클릭 시
+            $('#startBtn').click(function() {
+                var galleryId = 'boobs';  // 원하는 갤러리 ID로 교체
+                $.ajax({
+                    url: `/start_crawling/${galleryId}/`,
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+            // 정지 버튼 클릭 시
+            $('#stopBtn').click(function() {
+                $.ajax({
+                    url: '/stop_crawling/',
+                    type: 'GET',
+                    success: function(response) {
+                        console.log(response);
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            });
+
+            // 로그 가져오기
+            function getLogs() {
+                $.ajax({
+                    url: '/get_logs/',
+                    type: 'GET',
+                    success: function(response) {
+                        $('#logContainer').empty();
+                        response.logs.forEach(function(log) {
+                            $('#logContainer').append(`<p>${log}</p>`);
+                        });
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            }
+
+            // 주기적으로 로그 업데이트
+            setInterval(getLogs, 5000);  // 5초마다 업데이트
+        });
+    </script>
+</body>
+</html>

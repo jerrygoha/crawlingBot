@@ -22,9 +22,15 @@ from django.urls import path
 
 from . import views
 from crawlingApp.view import mainPage
+from crawlingApp.controller import crawlingImg
 
 urlpatterns = [
     path("", views.index, name="index"),
     ##메인화면
-    path("", mainPage.admin_main, name="admin_main"),
+    ##path("", mainPage.admin_main, name="admin_main"),
+
+    # 크롤링 및 로그 URL 패턴 추가
+    path('start_crawling/<str:gallery_id>/', crawlingImg.start_crawling, name='start_crawling'),
+    path('stop_crawling/', crawlingImg.stop_crawling, name='stop_crawling'),
+    path('get_logs/', crawlingImg.get_logs, name='get_logs'),
 ]

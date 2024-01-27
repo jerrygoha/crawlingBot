@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crawling Logs</title>
+</head>
+<body>
+    <h1>Crawling Logs</h1>
+    <ul>
+        {% for log in logs %}
+            <li>{{ log.created_at }} - Gallery {{ log.gallery_id }} - Log ID: {{ log.id }}</li>
+            <ul>
+                {% for image in log.images %}
+                    <li><img src="{{ image }}" alt="Image"></li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+</body>
+</html>
